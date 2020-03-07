@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Turrets/GunTurret.gd" type="Script" id=1]
+[ext_resource path="res://assets/towerDefense_tilesheet_half_size.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/towerDefense_tile250.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 27.2438, 28.3183 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 188.055
+
+[node name="GunTurret" type="KinematicBody2D"]
+position = Vector2( -0.0838699, 0.0250454 )
+scale = Vector2( 0.5, 0.5 )
+collision_mask = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite2" type="Sprite" parent="."]
+scale = Vector2( 1.98648, 2.05208 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 608, 224, 32, 32 )
+
+[node name="Gun" type="Sprite" parent="."]
+rotation = -1.5708
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="FireLine" type="RayCast2D" parent="."]
+modulate = Color( 0.137255, 0.0431373, 0.870588, 1 )
+position = Vector2( 0.368042, -0.368057 )
+rotation = 1.5708
+enabled = true
+cast_to = Vector2( 0, 200 )
+collision_mask = 7
+
+[node name="EnemyDetector" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetector"]
+shape = SubResource( 2 )
